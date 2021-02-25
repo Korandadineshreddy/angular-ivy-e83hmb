@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head></head>
+    <body>
+    
+        <div class="main-content" class="col-md-6 bg-white" >
+            <h3 class="first" 
+            style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+            Note Pad</h3>
+            
+            <div class="text-editor-header">
+                <form #postForm="ngForm" (ngSubmit)="onCreatePost(postForm.value)">
+                    <div class="form-group">
+                      
+                      <label for="title">Title</label>
+                      <input type="text" 
+                      class="form-control" id="title" required ngModel name="title" #title/>
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Content</label>
+                      
+                        <textarea [attr.disabled]="words >100 ? '' : null" (keydown)="wordCounter()" #text id="wmd-input" name="post-text" data-post-type-id="2" tabindex="101" data-min-length="" oncopy="return false;" onpaste="return false;" oncut="return false;" rows="10" cols="60" class="form-control" width="300" height="400" id="content" required ngModel name="content" spellcheck="true">
+                        </textarea>
+                
+                        <label for="date">Date</label>
+                        <input type="datetime-local" class="form-control" id="date" required ngModel name="date" #date placeholder="dd-mm-yyyy">
+                        <div class="tab">Words:<span id="wordCount">{{ words }}</span></div>
+                    </div>
+                    <button
+                      class="btn btn-primary"
+                      style="background-color:salmon;"
+                      type="submit"
+                      [disabled]="!postForm.valid"
+                    >
+                     {{editMode? 'Update Notes' : 'Save Notes'}} 
+                    </button>
+                    <input type="reset" class="btn btn-danger" 
+                    style="background-color:salmon;" value="Reset">
+                    
+                </form><br>
+                <button class="btn btn-warning" 
+                style="background-color:salmon;" 
+                (click)="onFetchNotes()">Fetch Notes</button>
+                <button class="btn btn-danger" 
+                style="background-color:salmon;" 
+                (click)="onClearNotes()">Clear All Notes</button>
+              
+            </div>
+                
+        </div>
+        
+        <div class="col">
+            <div class="main-content" class="col-md-6 bg-white"><br>
+              
+                <h3 class="first" 
+                style="font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                Saved Notes</h3>
+                
+                <div class="inner-addon right-addon">
+                    <input class="form-control" type="search" name="search" aria-setsize="25"
+                    [(ngModel)]="searchText" autocomplete="off" 
+                    placeholder="Enter the Title">
+                    <i style="background-color: salmon;" class="glyphicon glyphicon-search"></i><br>
+                </div>
+
+                <p *ngIf="loadedPost.length < 1">No Notes are Available!</p>
+                <ul class="list-group" *ngIf="loadedPost.length >= 1">
+                    <li class="list-group-item" *ngFor="let post of loadedPost | 
+                    filter:searchText;index as i ">
+                        <h3 style="color:black">Title:-{{post.title}}</h3>
+                        <p style="color:black">Content:-{{post.content}}</p>
+                        <p style="color:black">date:-{{post.date}}</p>
+                        <i class="tab" (click)="onEditNotes(post.id,i)">
+                            <a style="color: coral;" class="glyphicon glyphicon-edit"></a></i>
+                        <i class="tab" (click)="ondelete(post.id)"><a style="color: red;" 
+                            class="glyphicon glyphicon-trash"></a></i>
+                           
+                    </li>
+                  </ul>
+
+            </div>
+        </div>
+    </body>
+</html>        
+

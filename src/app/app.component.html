@@ -1,4 +1,42 @@
-<hello name="{{ name }}"></hello>
-<p>
-  Start editing to see some magic happen :)
-</p>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+  </head>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <ul class="nav navbar-nav">
+          <li role="presentation"><a routerLink="/home">Notepad</a></li>
+          <li role="presentation"><a routerLink="/file">File</a></li>
+          <li role="presentation"><a routerLink="/help">Help</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li role="presentation"><a routerLink="/about">About Us</a></li>
+
+        </ul>
+         
+        
+      </div>
+    </nav>
+    <router-outlet></router-outlet>
+    <div class="dummy">
+
+    </div>
+    <div class="col-3 col-s-12">
+      <footer>
+        <table style="width:100%">
+          <tr>
+            <td><p class="footerp">Copyright @2021 by A68</p></td>
+            
+          </tr>
+        
+        </table>
+      </footer>
+    </div>
+  </body>
+
+</html>
